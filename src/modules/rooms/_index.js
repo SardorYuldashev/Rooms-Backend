@@ -16,8 +16,8 @@ const typeDefs = readFileSync(
 const resolvers = {
   Query: {
     rooms: async (_, args) => {
-      const result =  await listRooms(args.input);
-      
+      const result = await listRooms(args.input);
+
       return result;
     },
 
@@ -48,11 +48,6 @@ const resolvers = {
       subscribe: () => pubsub.asyncIterator(['ROOM_CREATED']),
     }
   },
-  // RoomsList: {
-  //   list: async () => {
-  //     return await roomList();
-  //   }
-  // },
 
 };
 

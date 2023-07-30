@@ -1,18 +1,10 @@
 import db from '../../db/index.js';
-import { BadRequestError } from '../../shared/errors/index.js';
 
 export const listRooms = async (query = {}) => {
-  // let {
-  //   q = null,
-  //   page: { limit, offset } = { limit: 10, offset: 0 },
-  //   sort: { by, order } = { by: 'id', order: "ASC" },
-  //   filters: { floor, for_stuff } = { floor: 2, for_stuff: false }
-  // } = query;
-
   let {
     q = null,
-    page: { limit, offset } = { limit: 10, offset: 0 },
-    sort: { by, order } = { by: 'id', order: 'ASC' },
+    page: { limit, offset } = { limit: 5, offset: 0 },
+    sort: { by, order } = { by: 'id', order: 'DESC' },
     filters: { floor, for_stuff } = { floor: null, for_stuff: null }
   } = query;
 
@@ -30,6 +22,8 @@ export const listRooms = async (query = {}) => {
     dbQuery.andWhereILike('name', `%${q}%`);
   };
 
+  const total = await dbQuery.clone().count().groupBy("id");
+
   dbQuery.orderBy(by, order);
 
   dbQuery.limit(limit).offset(offset);
@@ -38,7 +32,7 @@ export const listRooms = async (query = {}) => {
 
   return {
     list: rooms,
-    total: rooms.length,
+    total: total.length,
     offset,
     limit,
   };

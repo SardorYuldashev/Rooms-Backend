@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> } 
  */
-export const seed = async function(knex) {
+export const seed = async function (knex) {
   await knex('rooms').del()
   await knex('rooms').insert([
     {
@@ -65,6 +65,6 @@ export const seed = async function(knex) {
       floor: 2,
       for_stuff: false
     },
-    
+
   ]);
 };

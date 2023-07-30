@@ -14,10 +14,10 @@ export function buildGraphQLServer(httpServer) {
   const server = new ApolloServer({
     schema,
     plugins: [
-      // Http serverda xatolik bo'lsa serverni to'xtatish uchun plugin
+
       ApolloServerPluginDrainHttpServer({ httpServer }),
       {
-        // Ws serverda xatolik bo'lsa serverni to'xtatish uchun sozlama
+
         async serverWillStart() {
           return {
             async drainServer() {

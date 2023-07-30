@@ -60,6 +60,7 @@ input SortRoomsInput {
 enum SortRoomBy {
 	id
 	floor
+	name
 }
 
 enum SortOrder {
